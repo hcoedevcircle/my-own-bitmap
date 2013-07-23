@@ -1,13 +1,29 @@
-/*writebm.c -- writes bitmap in files (not standard bitmap) */
+/*********************************************************
+ * writebm.c 
+ * writes bitmap in files (not standard bitmap) 
+ * 
+ * @version 1.0.0
+ * @author Nootan Ghimire <nootan.ghimire@gmail.com>
+ * 
+ ********************************************************/ 
 
+
+//Includes
 #include<stdio.h>
-#include<conio.h>
+#include<conio.h> //used for getch()
 
+//Structure defination
 typedef struct {
   int char_id;            // Char_id
   int char_bmap[16];  // The real character bitmap
   } xbmp;
 
+/*****************************************
+ * main
+ * @params none
+ * @return void
+ *****************************************/ 
+ 
 void main() {
   FILE *fp;
   int maxlen, i, j;   //MaxLength and legacy counters :)
