@@ -1,5 +1,5 @@
- #include&lt;stdio.h&gt;
-#include&lt;conio.h&gt;
+#include<stdio.h>
+#include<conio.h>
 #define MAX_BMP_SZ 100
 //Struct Defn'
 typedef struct {
@@ -15,9 +15,9 @@ void main() {
     xbmp char_coll[MAX_BMP_SZ], temp;
     i = j = k= 0; //not really needed. Just for fun :D
     //open a file
-    fp = fopen(&quot;test.xbmp&quot;,&quot;rb&quot;);
+    fp = fopen("test.xbmp","rb");
     while(!feof(fp)) {
-        fread(&amp;temp, sizeof(temp),1, fp);
+        fread(&temp, sizeof(temp),1, fp);
         char_coll[i] = temp ;  //copying Structure
         i++; //update
     }
@@ -26,11 +26,11 @@ void main() {
 
     //Now display the contents : TEST CASE
 
-    for(j=0;  j&lt;=i-2 ; j++ ) {
-        printf(&quot;\n----------------------------\n\nChar ID: %d&quot;, char_coll[j].char_id);
-        printf(&quot;\n\nShowing Character Bitmap Now: &quot;);
-        for(k=0; k&lt;=15; k++) {
-            printf(&quot;\nHex For Line %d :::  %x&quot;, char_coll[j], char_coll[j].char_bmap[k]);
+    for(j=0;  j<=i-2 ; j++ ) {
+        printf("\n----------------------------\n\nChar ID: %d", char_coll[j].char_id);
+        printf("\n\nShowing Character Bitmap Now: ");
+        for(k=0; k<=15; k++) {
+            printf("\nHex For Line %d :::  %x", char_coll[j], char_coll[j].char_bmap[k]);
         }
     }
 
@@ -39,7 +39,7 @@ void main() {
 void display_all_pixels(xbmp coll[], int len) {
 
     //This is the Turbo C Version of the function.
-    //This requires #include &lt;graphics.h&gt; preprocessor directive.
+    //This requires #include <graphics.h> preprocessor directive.
     //You are welcome to make your own function for a different Platform
     //Showcasing the Font Contents
 
@@ -60,15 +60,15 @@ void display_all_pixels(xbmp coll[], int len) {
    do{
         curr_x = hold_x;
         curr_y = hold_y;
-        for(i=curr_x ; i&lt;=curr_x+7; i++) {
-            for(j=curr_y; j&lt;=curr_y+15; j++){
+        for(i=curr_x ; i<=curr_x+7; i++) {
+            for(j=curr_y; j<=curr_y+15; j++){
                     if (output_array[iterator][i][j]) putpixel(i,j, 1);
                         hold_y++;
             } //end inner for loop
             hold_x++;
         } //end outer for loop
         iterator++;
-    }while(hold_x&lt;=x_max &amp;&amp; hold_y&lt;=y_max);
+    }while(hold_x<=x_max && hold_y<=y_max);
 
 }
 
@@ -83,19 +83,19 @@ void convert_bmp_for_showcase(xbmp char_coll[], int len, int output_array[][8][1
 
     //Counters:
     int i, j,k;
-    for(i=0; i&lt;=len; i++){
+    for(i=0; i<=len; i++){
         //This is for first dimension
-        for(j=0; j&lt;=15;j++){
+        for(j=0; j<=15;j++){
             //Now mask 'em
             //Use loops, instead, eh?
-            output_array[i][0][j] = char_coll[j].char_bmap[k] &amp; 0x80 ;
-            output_array[i][1][j] = char_coll[j].char_bmap[k] &amp; 0x40 ;
-            output_array[i][2][j] = char_coll[j].char_bmap[k] &amp; 0x20 ;
-            output_array[i][3][j] = char_coll[j].char_bmap[k] &amp; 0x10 ;
-            output_array[i][4][j] = char_coll[j].char_bmap[k] &amp; 0x8 ;
-            output_array[i][5][j] = char_coll[j].char_bmap[k] &amp; 0x4;
-            output_array[i][6][j] = char_coll[j].char_bmap[k] &amp; 0x2 ;
-            output_array[i][7][j] = char_coll[j].char_bmap[k] &amp; 0x1 ;
+            output_array[i][0][j] = char_coll[j].char_bmap[k] & 0x80 ;
+            output_array[i][1][j] = char_coll[j].char_bmap[k] & 0x40 ;
+            output_array[i][2][j] = char_coll[j].char_bmap[k] & 0x20 ;
+            output_array[i][3][j] = char_coll[j].char_bmap[k] & 0x10 ;
+            output_array[i][4][j] = char_coll[j].char_bmap[k] & 0x8 ;
+            output_array[i][5][j] = char_coll[j].char_bmap[k] & 0x4;
+            output_array[i][6][j] = char_coll[j].char_bmap[k] & 0x2 ;
+            output_array[i][7][j] = char_coll[j].char_bmap[k] & 0x1 ;
             //End Masking...
         } //End j loop
     }  //End i loop
@@ -107,14 +107,14 @@ void convert_bmp_for_showcase(xbmp char_coll[], int len, int output_array[][8][1
 
 void plot_hex_horizontal(int hex_value, int start_x, int in_y, int color){
     //Plots hex value directly using plot pixel
-    if(hex_value &amp; 0x80 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x40 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x20 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x10 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x8 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x4 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x2 ) putpixel(start_x, in_y, color); start_x++;
-    if(hex_value &amp; 0x1 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x80 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x40 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x20 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x10 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x8 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x4 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x2 ) putpixel(start_x, in_y, color); start_x++;
+    if(hex_value & 0x1 ) putpixel(start_x, in_y, color); start_x++;
     //End function
 }
 
