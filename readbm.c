@@ -1,31 +1,46 @@
+/*****************************************************
+ * @autor Nootan Ghimire <nootan.ghimire@gmail.com>
+ * @version 1.0.0
+ ****************************************************/
+
 #include<stdio.h>
 #include<conio.h>
+//remove the comment if you want a working test :D
+//#include<graphics.h>
 #define MAX_BMP_SZ 100
-//Struct Defn'
+
+//Structure  Defination
+
 typedef struct {
   int char_id;            // Char_id
-  int char_bmap[16];  // The real character bitmap
+  int char_bmap[16];     // The real character bitmap
   } xbmp ;
 
+/*****************************************************************
+ * main()
+ * @params none
+ * @return none
+ * 
+ * You can add functionality to get file as command line arguments
+ *****************************************************************/ 
 void main() {
 
     FILE *fp;
-    int i, j, k ; //legacy counters
-    int len; //No. of characters loaded.
+    int i, j, k ;                               //legacy counters
+    int len;                                   //No. of characters loaded.
     xbmp char_coll[MAX_BMP_SZ], temp;
-    i = j = k= 0; //not really needed. Just for fun :D
-    //open a file
+    i = j = k= 0;                             //not really needed. Just for fun :D
     fp = fopen("test.xbmp","rb");
     while(!feof(fp)) {
         fread(&temp, sizeof(temp),1, fp);
-        char_coll[i] = temp ;  //copying Structure
-        i++; //update
+        char_coll[i] = temp ;               //copying Structure
+        i++;                  
     }
     fclose(fp);
-    len = i - 2 ;  //Since we-are zero indexing, i think
+    len = i - 2 ;                         //Since we-are zero indexing, i think
 
     //Now display the contents : TEST CASE
-
+    //This is for debug. Replace it with display_all_pixels(char_coll, len)
     for(j=0;  j<=i-2 ; j++ ) {
         printf("\n----------------------------\n\nChar ID: %d", char_coll[j].char_id);
         printf("\n\nShowing Character Bitmap Now: ");
@@ -35,6 +50,14 @@ void main() {
     }
 
 }
+
+
+/****************************************************************
+ * dispaly_all_pixels
+ * @param type:xbmp structure array
+ * @param type:int
+ * @return none
+ ****************************************************************/ 
 
 void display_all_pixels(xbmp coll[], int len) {
 
@@ -48,9 +71,9 @@ void display_all_pixels(xbmp coll[], int len) {
    int curr_x, curr_y, hold_x, hold_y ;
    int i,j; //legacy counters
    int iterator=0; //for_number of entries
-  typedef int element2d[8][16];
-  element2d *output_array;
-  output_array = (element2d*) (malloc(len*sizeof(element2d)));
+   typedef int element2d[8][16];
+   element2d *output_array;
+   output_array = (element2d*) (malloc(len*sizeof(element2d)));
 
    //Convert bitmap to readable, i.e, seperate hex to bin
    convert_bmp_for_showcase(coll, len, output_array);
@@ -71,6 +94,13 @@ void display_all_pixels(xbmp coll[], int len) {
     }while(hold_x<=x_max && hold_y<=y_max);
 
 }
+/***************************************************************
+ * convert_bmp_for_showcase
+ * @param type:xbmp structue array (not-mutated)
+ * @param type:int
+ * @param type:int array (mutated)
+ * @return none
+ ***************************************************************/ 
 
 void convert_bmp_for_showcase(xbmp char_coll[], int len, int output_array[][8][16]) {
 
@@ -104,6 +134,14 @@ void convert_bmp_for_showcase(xbmp char_coll[], int len, int output_array[][8][1
    // which is 3-d and contains: [no_of_iterations][columns][columns]
 } //End function
 
+/**********************************************************************
+ * plot_hex_horizontal
+ * @param int hex_value
+ * @param int start_x
+ * @param int in_y
+ * @param int color
+ * @return void
+ *********************************************************************/ 
 
 void plot_hex_horizontal(int hex_value, int start_x, int in_y, int color){
     //Plots hex value directly using plot pixel
@@ -118,6 +156,7 @@ void plot_hex_horizontal(int hex_value, int start_x, int in_y, int color){
     //End function
 }
 
+/* Most probably unused! */ /* used it to increase size ;) (kidding) */
 int* create_3d_array(int x, int y, int z){
 int* a;
 a = (int *) (malloc(x*y*z*sizeof(int)));
