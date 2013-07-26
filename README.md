@@ -1,7 +1,7 @@
 My Own (and Non-Standard) Bitmap Reader/Writer
 =============
 
-Did this just for fun. Worked with the idea of Mr. Niraj Khadka and coded independently. 
+Did this just for fun. Worked with the idea of [Niraj Khadka](http://twitter.com/N3Ur0t0x1c) and coded independently. 
 
 
 What for?
