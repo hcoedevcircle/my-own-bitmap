@@ -21,6 +21,11 @@ Do not forget to include graphics.h and do some minor edits  before running the 
 That's all. 
 
 
+Issues
+====
+
+Should there been any worries, or issues trying to help me out by testing this program, do file an issue or just drop an email
+on nootan.ghimire@gmail.com 
 
 License
 =====
